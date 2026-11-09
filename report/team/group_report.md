@@ -216,38 +216,39 @@ Nhóm đồng ý một phần: Nhóm có thể thiết lập quy trình 2 bướ
 
 ### 6.1. Ma trận độ mơ hồ × độ phức tạp
 
-Bài của nhóm nằm ở ô:
+Bài của nhóm nằm ở ô: Độ mơ hồ cao × Độ phức tạp trung bình → Workflow có AI ở một bước, có người kiểm tra.
 
-Vì sao:
+- Độ mơ hồ cao: cùng một báo cáo có thể tóm tắt thành nhiều bộ gạch đầu dòng khác nhau mà vẫn chấp nhận được; không có một đáp án đúng/sai duy nhất cho "slide tốt". Vì vậy cần tiêu chí đánh giá và người duyệt.
+- Độ phức tạp trung bình: quy trình có 5–7 bước nối tiếp (trích text → dàn ý → tóm tắt → duyệt → chèn ảnh → áp template → duyệt cuối), nhưng thứ tự các bước cố định, không rẽ nhánh, chỉ có 1 nguồn dữ liệu chính là file báo cáo của nhóm.
 
 ### 6.2. So sánh 4 mức
 
 | Mức | Phương án cho bài của nhóm | Đủ khi nào | Rủi ro | Chọn? |
 |---|---|---|---|---|
-| **No AI** (sửa quy trình) | | | | |
-| **Rule** | | | | |
-| **Workflow** | | | | |
-| **Agent** | | | | |
+| **No AI** (sửa quy trình) | Dùng template slide có sẵn + quy ước 6x6 + chia mỗi người tự tóm tắt chương mình viết | Báo cáo ngắn, mỗi người tự nắm phần của mình | Không giảm được bước 3 (tóm tắt 60') và bước 1 (đọc lọc ý 30') vốn là bottleneck chính | Dùng làm fallback |
+| **Rule** | Marp: viết dàn ý Markdown theo heading chương/mục → tự xuất slide theo template cố định; script khóa font, màu, bố cục | Bước trích text theo heading và bước áp template | Rule không đọc hiểu được ngữ nghĩa, không tóm tắt được đoạn văn dài thành bullet | Dùng cho bước 2 và bước 6 |
+| **Workflow** | Rule trích text theo heading → AI đề xuất dàn ý + tóm tắt bullet + gợi ý dạng sơ đồ, kèm số trang gốc → sinh viên duyệt, sửa thuật ngữ, chọn ảnh thật → Rule áp template, xuất file | Các bước định sẵn, AI chỉ làm phần ngôn ngữ (tóm tắt) | AI tóm tắt sai, bỏ sót luận điểm, đổi thuật ngữ → xử lý bằng bước HITL bắt buộc và fallback | Chọn |
+| **Agent** | AI tự đọc báo cáo, tự tìm ảnh trên mạng, tự quyết số slide, tự dựng và xuất slide hoàn chỉnh | Khi bước tiếp theo không đoán trước được | Kiểm chứng CP4: 2/2 người được hỏi không muốn công cụ tự làm hết nội dung và hình ảnh; dễ bịa thông tin, chèn ảnh sai, sinh viên không hiểu bài để trả lời hội đồng | Không chọn |
 
-**Mức chọn:**
+**Mức chọn:** Workflow.
 
-**Vì sao không chọn mức đơn giản hơn:**
+**Vì sao không chọn mức đơn giản hơn:** Bottleneck chính là bước 3 (tóm tắt đoạn văn dài thành gạch đầu dòng, 60') và bước 1 (đọc lọc ý, 30'). Đây là việc hiểu ngữ nghĩa: No AI (template) chỉ giải bước định dạng (25'), còn Rule (Marp) chỉ chuyển Markdown đã viết sẵn thành slide, người dùng vẫn phải tự cắt gọt chữ. Cả hai mức đều không chạm vào 90' lớn nhất. Ngược lại, không cần lên Agent vì các bước đã cố định và người dùng muốn giữ quyền kiểm soát.
 
 ### 6.3. AI Canvas rút gọn
 
 | Thành phần | Nội dung |
 |---|---|
-| **Prediction** — AI dự đoán / tạo ra gì? | |
-| **Judgment** — con người cân nhắc, quyết định gì? | |
-| **Action** — hành động cuối cùng là gì, ai làm? | |
-| **Outcome** — đo kết quả bằng gì? | |
-| **Input** — AI cần dữ liệu đầu vào gì mỗi lần chạy? Có sẵn không? | |
-| **Feedback** — lấy phản hồi ở đâu để cải thiện? | |
+| **Prediction** — AI dự đoán / tạo ra gì? | Dàn ý slide theo số slide yêu cầu (20–25 slide); mỗi slide 3–6 gạch đầu dòng tóm tắt từ báo cáo, kèm số trang gốc; gợi ý dạng sơ đồ (luồng, so sánh, timeline) cho slide phù hợp; cảnh báo đoạn văn mơ hồ hoặc thiếu số liệu |
+| **Judgment** — con người cân nhắc, quyết định gì? | Sinh viên làm slide quyết định ý nào giữ, ý nào bỏ; kiểm thuật ngữ chuyên ngành và công thức; chọn ảnh/sơ đồ thật từ đồ án; quyết định có trả đoạn mơ hồ về cho thành viên viết phần đó hay không |
+| **Action** — hành động cuối cùng là gì, ai làm? | Sinh viên duyệt và sửa dàn ý, chèn ảnh thật, bấm xuất slide qua template (Rule); trưởng nhóm duyệt lần cuối trước buổi thuyết trình |
+| **Outcome** — đo kết quả bằng gì? | Tổng thời gian làm slide (bấm giờ); số phút phải sửa tay phần AI tóm tắt; tỉ lệ slide đạt 6x6; số lỗi sai/bịa nội dung phát hiện khi đối chiếu số trang |
+| **Input** — AI cần dữ liệu đầu vào gì mỗi lần chạy? Có sẵn không? | File báo cáo của nhóm (Word/PDF, 25–30 trang, có heading chương/mục) — có sẵn; số slide và thời lượng thuyết trình — có sẵn từ đề bài; bộ quy tắc trình bày (6x6, 1 ý/slide) — nhóm tự đặt |
+| **Feedback** — lấy phản hồi ở đâu để cải thiện? | Phần sinh viên sửa trong dàn ý AI mỗi lần (ghi lại bullet bị xóa/viết lại); nhận xét của giảng viên về slide; câu hỏi hội đồng mà slide không trả lời được |
 
 ### 6.4. Hai câu hỏi của Google PAIR
 
-- Người dùng muốn **được hỗ trợ (augment)** hay **giao hẳn việc (automate)**? Bằng chứng:
-- AI sai kiểu nào tệ hơn, **báo nhầm** hay **bỏ sót**? Vì sao, và thiết kế đã xử lý thế nào:
+- Người dùng muốn **được hỗ trợ (augment)** hay **giao hẳn việc (automate)**? Bằng chứng: Augment. Cả 2 người được phỏng vấn ở CP4 đều làm slide thủ công và không muốn công cụ tự làm hết: "Nếu công cụ tự động làm hết cả slide lẫn hình ảnh thì mình sẽ không dùng vì sẽ không đúng ý thẩm mỹ của mình". Sinh viên còn phải hiểu nội dung để trả lời phản biện, nên AI chỉ làm bản nháp dàn ý để người sửa.
+- AI sai kiểu nào tệ hơn, **báo nhầm** hay **bỏ sót**? Vì sao, và thiết kế đã xử lý thế nào: Bỏ sót tệ hơn. Nếu AI bỏ sót một luận điểm hoặc số liệu quan trọng của báo cáo, sinh viên khó nhận ra (vì slide trông vẫn gọn, đẹp) và sẽ bị hội đồng hỏi đúng chỗ thiếu. Báo nhầm (cảnh báo một đoạn mơ hồ nhưng thực ra ổn) chỉ tốn thêm vài phút kiểm tra. Thiết kế xử lý: AI phải ghi số trang cho từng bullet; người duyệt đối chiếu dàn ý với danh sách heading của báo cáo để thấy chương nào chưa có slide; tiêu chí #1 ưu tiên "không bỏ sót luận điểm chính".
 
 ---
 
@@ -255,29 +256,37 @@ Vì sao:
 
 | Trường | Nội dung |
 |---|---|
-| **Actor** | |
-| **Quy trình** | |
-| **Bottleneck** | |
-| **Impact** | |
-| **Success Metric** (baseline → target, cách đo) | |
-| **Boundary** | |
-| **AI intervention point** | |
-| **Mức chọn** | No AI / Rule / Workflow / Agent |
-| **Rủi ro & người kiểm tra** | |
+| **Actor** | Sinh viên phụ trách làm slide thuyết trình cho bài tập lớn/đồ án đã có báo cáo viết sẵn (25–30 trang) |
+| **Quy trình** | Trích text theo heading → lập dàn ý cho slide → tóm tắt đoạn văn thành gạch đầu dòng → chọn ảnh/vẽ sơ đồ → căn chỉnh bố cục, định dạng |
+| **Bottleneck** | Tóm tắt đoạn văn dài thành gạch đầu dòng (60') và đọc lọc ý (30'); hệ quả là slide nhiều chữ, dễ cụt ý |
+| **Impact** | 3–4 tiếng cho mỗi bài thuyết trình (phỏng vấn: 4–5 tiếng, có người mất 1–2 ngày); slide nhiều chữ khiến thuyết trình quá giờ và bị trừ điểm trình bày |
+| **Success Metric** (baseline → target, cách đo) | (1) Tổng thời gian làm slide 20–25 trang: 180' → dưới 65', đo bằng bấm giờ trên 3 báo cáo pilot; (2) thời gian sửa tay phần AI tóm tắt dưới 30'/bài; (3) 100% slide đạt quy tắc 6x6; (4) 0 bullet không truy được về số trang trong báo cáo gốc |
+| **Boundary** | AI không được: bịa thông tin ngoài file báo cáo; tự tìm và chèn ảnh trên mạng; tự đổi thuật ngữ, công thức, số liệu; tự xuất slide khi chưa có người duyệt. HITL: sinh viên bắt buộc duyệt dàn ý và thuật ngữ trước khi áp template |
+| **AI intervention point** | Sau bước Rule trích text theo heading, trước bước sinh viên duyệt dàn ý: AI đề xuất dàn ý + tóm tắt bullet có số trang + gợi ý dạng sơ đồ |
+| **Mức chọn** | Workflow |
+| **Rủi ro & người kiểm tra** | AI bỏ sót luận điểm, bịa nội dung, đổi thuật ngữ → sinh viên làm slide đối chiếu từng bullet với số trang gốc và danh sách heading; trưởng nhóm duyệt bản cuối. Nếu AI sai nhiều → quay về template Canva/PowerPoint và tự tóm tắt theo heading |
 
 **Thay đổi so với v0 và lý do:**
 
 | Trường | v0 | v1 | Vì sao đổi |
 |---|---|---|---|
-| | | | |
+| Actor | Sinh viên phụ trách làm slide thuyết trình | Thêm: cho bài đã có báo cáo viết sẵn 25–30 trang | Bài toán là Document-to-Slide; research 3.3 cho thấy Canva/Gamma sinh từ prompt ngắn là bài toán khác |
+| Bottleneck | Tóm tắt (60') + tự vẽ/tìm sơ đồ (45') | Tóm tắt (60') + đọc lọc ý (30') | Kiểm chứng CP4: người dùng muốn tự chọn ảnh, nên bước tìm ảnh giữ lại cho con người, không còn là điểm AI can thiệp |
+| Success Metric | Thời gian 180' → <65'; 100% slide theo 6x6; số sơ đồ tăng 30% | Thêm thời gian sửa tay <30'/bài và 0 bullet không có số trang; bỏ chỉ tiêu "sơ đồ tăng 30%" | Phản biện "AI có lấy đúng nội dung không?" (CP3): nhanh hơn mà sai nội dung thì không đạt; chỉ tiêu sơ đồ khó đo khi người tự chọn ảnh |
+| Boundary | AI không bịa, không chèn ảnh mạng, không đổi thuật ngữ; người duyệt dàn ý | Thêm: mỗi bullet phải có số trang gốc; AI không tự xuất slide khi chưa duyệt | Để người duyệt kiểm chéo nhanh và chặn lỗi bỏ sót |
+| AI intervention point, Mức chọn, Rủi ro & người kiểm tra | (chưa có) | Như bảng trên | Trường mới của v1 theo CP6 |
 
 **Tiêu chí đánh giá đầu ra của AI (3–5 tiêu chí):**
 
 | # | Tiêu chí | Đạt khi | Không đạt khi |
 |---:|---|---|---|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
+| 1 | Không bỏ sót luận điểm (Coverage) | Mọi chương/mục chính của báo cáo đều có ít nhất 1 slide; các số liệu chính đều xuất hiện | Thiếu một chương/mục chính hoặc thiếu kết quả/số liệu quan trọng |
+| 2 | Trung thực với tài liệu (Fidelity) | Mọi bullet truy được về số trang trong báo cáo gốc | Có bullet không có trong báo cáo hoặc ghi sai số trang |
+| 3 | Giữ đúng thuật ngữ (Terminology) | Thuật ngữ, công thức, tên riêng giữ nguyên như báo cáo | AI đổi, dịch hoặc diễn giải sai thuật ngữ chuyên ngành |
+| 4 | Ngắn gọn (Conciseness) | Mỗi slide tối đa 6 bullet, mỗi bullet tối đa khoảng 6–8 từ | Chép nguyên câu dài hoặc slide quá 6 bullet |
+| 5 | Cấu trúc hợp lý (Structure) | Thứ tự slide theo mạch báo cáo, số slide khớp yêu cầu (20–25) | Đảo mạch nội dung, thừa/thiếu slide so với thời lượng |
+
+Bộ eval mẫu 10 cặp input/đầu ra mong đợi, chấm theo 5 tiêu chí trên: [cp6-eval-set.md](../assets/cp6-eval-set.md)
 
 ---
 
@@ -287,31 +296,47 @@ Vì sao:
 
 | Rủi ro | Câu hỏi | Mức độ rủi ro (Thấp = an toàn / TB / Cao = nguy hiểm) | Lý do / bằng chứng |
 |---|---|---|---|
-| **Value** | Người dùng có thật sự cần và sẽ dùng không? | | |
-| **Usability** | Người dùng có dùng được, có hiểu và sửa được đầu ra của AI không? | | |
-| **Feasibility** | Có đủ dữ liệu, công cụ, kỹ năng để làm không? | | |
-| **Viability** | Có hợp chi phí, pháp lý, quy định tổ chức không? Ai vận hành? | | |
+| **Value** | Người dùng có thật sự cần và sẽ dùng không? | TB | 2/2 người phỏng vấn xác nhận làm slide tốn 4–5 tiếng đến 1–2 ngày, khâu tóm tắt là khó nhất; nhưng mẫu mới có 2 người và cả 2 từ chối nếu công cụ làm hết, nên chỉ có giá trị khi giữ quyền kiểm soát cho người dùng |
+| **Usability** | Người dùng có dùng được, có hiểu và sửa được đầu ra của AI không? | Thấp | Đầu ra là dàn ý văn bản có số trang, sinh viên sửa trực tiếp như sửa văn bản; template slide là PowerPoint/Canva quen thuộc |
+| **Feasibility** | Có đủ dữ liệu, công cụ, kỹ năng để làm không? | TB | Dữ liệu có sẵn (file báo cáo); LLM tóm tắt được văn bản. Nhưng báo cáo kỹ thuật 25–30 trang có bảng, công thức, hình nên việc trích text và giữ thuật ngữ chưa chắc ổn định; research cho thấy Gamma tóm tắt nông với tài liệu dài |
+| **Viability** | Có hợp chi phí, pháp lý, quy định tổ chức không? Ai vận hành? | Thấp | Pilot dùng công cụ AI có gói miễn phí, không cần xây hệ thống; sinh viên tự vận hành. Cần tuân thủ quy định của môn học về dùng AI và tự hiểu nội dung slide |
 
 ### 8.2. Kết luận
 
-**Quyết định:** Go / Not Yet / No-Go
+**Quyết định:** Go (phạm vi nhỏ, có điều kiện)
 
-**Lý do:**
+**Lý do:** Không có rủi ro mức Cao. Hai rủi ro TB (Value do mẫu nhỏ, Feasibility do tài liệu kỹ thuật dài) đều kiểm tra được ngay trong pilot, không cần xây gì trước.
 
 **Nếu Go — pilot nhỏ nhất:**
+- Không xây công cụ. Dùng 3 báo cáo bài tập lớn thật của sinh viên (của nhóm và nhóm bạn, có đồng ý).
+- Với mỗi báo cáo: dán text theo heading vào một prompt chuẩn (yêu cầu dàn ý, bullet có số trang, cấm thêm thông tin ngoài file) → sinh viên duyệt và sửa → áp template slide có sẵn.
+- Ghi lại: tổng thời gian, thời gian sửa tay, chấm đầu ra AI theo 5 tiêu chí ở mục 7.
 
-**Nếu Not Yet — cần kiểm chứng gì trước:**
+**Nếu Not Yet — cần kiểm chứng gì trước:** Không áp dụng.
 
-**Nếu No-Go — nên làm gì thay AI:**
+**Nếu No-Go — nên làm gì thay AI:** Không áp dụng.
 
 **Ngưỡng dừng** (nếu sau … mà … thì quay về …):
+- Nếu sau 3 báo cáo pilot mà thời gian sinh viên phải sửa tay phần AI tóm tắt vượt quá 60 phút/bài, thì dừng và quay về làm slide thủ công bằng template + quy tắc 6x6 (No AI).
+- Nếu có 1 bullet bịa nội dung hoặc bỏ sót luận điểm chính mà người duyệt không phát hiện trước khi xuất slide, thì dừng pilot và xem lại bước kiểm tra HITL.
 
 ---
 
 ## 9. Hạn chế và hướng tiếp theo
 
--
+- Số người được phỏng vấn còn ít: mới có 2 người (1 sinh viên, 1 cựu sinh viên).
+- Chất lượng slide phụ thuộc chất lượng báo cáo đầu vào: nếu báo cáo viết sơ sài hoặc lủng củng thì AI khó tóm tắt đúng. Hướng xử lý: AI cảnh báo đoạn thiếu số liệu hoặc tối nghĩa để thành viên viết phần đó bổ sung trước khi làm slide.
+- Rủi ro sinh viên ỷ lại vào AI, không đọc kỹ báo cáo nên khó trả lời phản biện khi thuyết trình. Hướng xử lý: bước HITL bắt buộc xác nhận từng mục dàn ý trước khi xuất slide.
+- Quy định dùng AI có thể khác nhau giữa các môn và giảng viên; trước khi dùng cho bài thuyết trình thật cần kiểm tra quy định của môn đó.
 
 ## 10. Tài liệu tham khảo
 
--
+- Gamma: https://gamma.app
+- Marp: https://marp.app
+- Canva: https://www.canva.com
+- Anthropic — Building Effective Agents: https://www.anthropic.com/research/building-effective-agents
+- Google PAIR — User Needs + Defining Success: https://pair.withgoogle.com/chapter/user-needs/
+- Marty Cagan (SVPG) — The Four Big Risks: https://www.svpg.com/four-big-risks/
+- Agrawal, Gans, Goldfarb — A Simple Tool to Start Making Decisions with the Help of AI (AI Canvas), HBR: https://hbr.org/2018/04/a-simple-tool-to-start-making-decisions-with-the-help-of-ai
+- Teresa Torres — Opportunity Solution Trees: https://www.producttalk.org/opportunity-solution-trees/
+- Rob Fitzpatrick — The Mom Test: https://www.momtestbook.com/
