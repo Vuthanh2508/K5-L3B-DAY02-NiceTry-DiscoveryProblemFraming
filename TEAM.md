@@ -13,7 +13,7 @@
 | STT | Họ và tên | MSSV | Vai trò trong nhóm | Tài khoản GitHub |
 |---:|---|---|---|---|
 | 1 | | | | |
-| 2 | | | | |
+| 2 | Nguyễn Thanh Nam | 2A202603934 | | Ishodayo |
 | 3 | | | | |
 | 4 | | | | |
 
